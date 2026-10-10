@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#020203">
+<meta name="color-scheme" content="dark">
+<title>Una galaxia para ti</title>
+<meta name="description" content="Una galaxia que existe solo para ti.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23020203'/%3E%3Ccircle cx='16' cy='16' r='3' fill='white'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,500&family=IBM+Plex+Mono:wght@400;500&family=Pinyon+Script&display=swap">
+<link rel="stylesheet" href="Styles.css">
+</head>
+<body>
+
+<div id="stage"></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<svg id="web" aria-hidden="true">
+  <path id="constel" d=""/>
+    <g id="ringg" visibility="hidden">
+        <circle id="ring0" r="15" cx="0" cy="0"/>
+            <circle id="ring1" r="15" cx="0" cy="0">
+                  <animate attributeName="r" values="15;40" dur="1.9s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values="0.8;0" dur="1.9s" repeatCount="indefinite"/>
+                            </circle>
+                              </g>
+                              </svg>
+
+                              <header class="title" id="title">
+                                <h1 id="dedic">Para ti</h1>
+                                  <p class="since" id="since" hidden></p>
+                                    <div class="pips" id="pips" role="img" aria-label="0 de 14 estrellas descubiertas"></div>
+                                    </header>
+
+                                    <div class="msg" id="msg" role="status" aria-live="polite" aria-hidden="true">
+                                      <p class="eyebrow" id="eyebrow"></p>
+                                        <p class="mtext" id="mtext"></p>
+                                          <p class="msig" id="msig"></p>
+                                            <button id="mclose" type="button">Cerrar</button>
+                                            </div>
+
+                                            <div class="hint" id="hint">Toca las estrellas que más brillan</div>
+
+                                            <button class="sr-only" id="srnext" type="button">Descubrir la siguiente estrella</button>
+
+                                            <nav class="panel" id="panel" aria-label="Controles">
+                                              <div class="panel-inner">
+                                                  <div class="row">
+                                                        <button id="heart" class="btn" type="button" aria-pressed="false">
+                                                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5C5 15.5 3 12 3 9a4.5 4.5 0 0 1 9-1 4.5 4.5 0 0 1 9 1c0 3-2 6.5-9 11.5z"/></svg>
+                                                                        <span id="heartlbl">Corazón</span>
+                                                                              </button>
+                                                                                    <button id="letterbtn" class="btn" type="button" aria-label="Leer la carta" hidden>
+                                                                                            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg>
+                                                                                                    <span class="opt">Carta</span>
+                                                                                                          </button>
+                                                                                                                <button id="postalbtn" class="btn" type="button" aria-label="Guardar una postal">
+                                                                                                                        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m21 16-5-5-8 8"/></svg>
+                                                                                                                                <span class="opt">Postal</span>
+                                                                                                                                      </button>
+                                                                                                                                            <button id="sound" class="btn" type="button" aria-pressed="true" aria-label="Sonido">
+                                                                                                                                                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z"/><path class="waves" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/></svg>
+                                                                                                                                                            <span class="opt" id="soundlbl">Sonido</span>
+                                                                                                                                                                  </button>
+                                                                                                                                                                        <button id="gear" class="btn" type="button" aria-expanded="false" aria-controls="adv" aria-label="Ajustes del cielo">
+                                                                                                                                                                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg>
+                                                                                                                                                                                      </button>
+                                                                                                                                                                                          </div>
+                                                                                                                                                                                              <div class="adv" id="adv" hidden>
+                                                                                                                                                                                                    <div class="group arms" id="arms" role="group" aria-label="Número de brazos">
+                                                                                                                                                                                                            <span class="lbl">Brazos</span>
+                                                                                                                                                                                                                  </div>
+                                                                                                                                                                                                                        <div class="group">
+                                                                                                                                                                                                                                <span class="lbl"><label for="speed">Giro</label></span>
+                                                                                                                                                                                                                                        <input id="speed" type="range" min="0" max="3" step="0.05" value="1">
+                                                                                                                                                                                                                                                <button id="pause" type="button" aria-pressed="false">Pausa</button>
+                                                                                                                                                                                                                                                      </div>
+                                                                                                                                                                                                                                                            <button id="replay" type="button" hidden>Repetir el final</button>
+                                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                                  </div>
+                                                                                                                                                                                                                                                                  </nav>
+
+                                                                                                                                                                                                                                                                  <section class="sheet" id="letter" role="dialog" aria-modal="true" aria-label="Carta" aria-hidden="true">
+                                                                                                                                                                                                                                                                    <div class="sheet-in">
+                                                                                                                                                                                                                                                                        <figure class="photo" id="lphoto" hidden><img id="lphotoimg" alt=""></figure>
+                                                                                                                                                                                                                                                                            <div class="paper" id="paper"></div>
+                                                                                                                                                                                                                                                                                <div class="sheet-actions">
+                                                                                                                                                                                                                                                                                      <button id="lplay" type="button" hidden>Escuchar mi voz</button>
+                                                                                                                                                                                                                                                                                            <button id="lpostal" type="button">Guardar postal</button>
+                                                                                                                                                                                                                                                                                                  <button id="lclose" type="button">Volver a las estrellas</button>
+                                                                                                                                                                                                                                                                                                      </div>
+                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                        </section>
+
+                                                                                                                                                                                                                                                                                                        <section class="sheet" id="postal" role="dialog" aria-modal="true" aria-label="Postal" aria-hidden="true">
+                                                                                                                                                                                                                                                                                                          <div class="sheet-in">
+                                                                                                                                                                                                                                                                                                              <img id="postalimg" alt="Postal con la galaxia">
+                                                                                                                                                                                                                                                                                                                  <p class="note" id="postalnote"></p>
+                                                                                                                                                                                                                                                                                                                      <div class="sheet-actions">
+                                                                                                                                                                                                                                                                                                                            <a id="postaldl" class="btnlike" href="#" download="galaxia.png">Descargar</a>
+                                                                                                                                                                                                                                                                                                                                  <button id="postalshare" type="button" hidden>Compartir</button>
+                                                                                                                                                                                                                                                                                                                                        <button id="postalclose" type="button">Cerrar</button>
+                                                                                                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                                                                              </div>
+                                                                                                                                                                                                                                                                                                                                              </section>
+
+                                                                                                                                                                                                                                                                                                                                              <div id="intro">
+                                                                                                                                                                                                                                                                                                                                                <div class="intro-in">
+                                                                                                                                                                                                                                                                                                                                                    <p class="l1" id="i1"></p>
+                                                                                                                                                                                                                                                                                                                                                        <p class="l2" id="i2"></p>
+                                                                                                                                                                                                                                                                                                                                                            <button id="ignite" class="ignite" type="button" aria-label="Enciende la galaxia: mantén presionada la estrella">
+                                                                                                                                                                                                                                                                                                                                                                  <svg viewBox="0 0 120 120" aria-hidden="true">
+                                                                                                                                                                                                                                                                                                                                                                          <circle class="ring-bg" cx="60" cy="60" r="52"/>
+                                                                                                                                                                                                                                                                                                                                                                                  <circle id="ringp" class="ring-p" cx="60" cy="60" r="52" transform="rotate(-90 60 60)"/>
+                                                                                                                                                                                                                                                                                                                                                                                        </svg>
+                                                                                                                                                                                                                                                                                                                                                                                              <i class="pt"></i>
+                                                                                                                                                                                                                                                                                                                                                                                                  </button>
+                                                                                                                                                                                                                                                                                                                                                                                                      <p class="note" id="holdnote">Mantén presionada la estrella</p>
+                                                                                                                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                                                                                                                        </div>
+
+                                                                                                                                                                                                                                                                                                                                                                                                        <div id="flash"></div>
+
+                                                                                                                                                                                                                                                                                                                                                                                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+                                                                                                                                                                                                                                                                                                                                                                                                        <script src="Script.js"></script>
+                                                                                                                                                                                                                                                                                                                                                                                                        </body>
+                                                                                                                                                                                                                                                                                                                                                                                                        </html>
+                                                                                                                                                                                                                                                                                                                                                                                                        
